@@ -14,7 +14,7 @@ function Team({ id, name, abbrev }: { id: number; name:string ; abbrev: string }
             Roster
           </Link>
           <p className='mx-2'>{"\u2022"}</p>
-          <Link href={'/'}>
+          <Link href={`/teams/${abbrev}/schedule`}>
             Schedule
           </Link>
         </div>
