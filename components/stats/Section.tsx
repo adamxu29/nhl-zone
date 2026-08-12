@@ -11,7 +11,7 @@ function Section<T extends PlayerBase>({ title, players, sections, basePath, top
   return(
     <div className='max-w-7xl mx-auto mb-5 rounded-md bg-white overflow-hidden'>
       <h2 className='text-xl font-semibold pl-4 py-1 bg-black text-white'>{title}</h2>
-      <div className='grid grid-cols-3 gap-px bg-gray-200'>
+      <div className='grid md:grid-cols-3 gap-px bg-gray-200'>
         {sections.map((s) => {
           const top = [...players]
             .sort((a, b) => {

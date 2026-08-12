@@ -1,6 +1,7 @@
 import React from 'react'
 import { supabase } from '@/lib/supabase'
 import Link from 'next/link'
+import { formatGameDate } from '@/lib/format'
 
 interface GameData {
   id: number
@@ -25,7 +26,7 @@ interface playerData{
 
 function Game({ game }: { game: GameData}) {
   return(
-    <div className='grid grid-cols-[1fr_auto_1fr] grid-rows-3 items-center justify-items-center my-3 h-35 w-75 px-2 rounded-md bg-white font-medium'>
+    <div className='grid grid-cols-[1fr_auto_1fr] grid-rows-3 items-center justify-items-center my-3 h-35 w-75 px-2 rounded-md bg-white font-medium shadow-sm'>
       {/* row 1 — logos */}
       <img className='mt-6 w-12 h-8' src={`https://assets.nhle.com/logos/nhl/svg/${game.home.abbrev}_light.svg`} alt={`${game.home.name} logo`}/>
       <span/>
@@ -37,7 +38,7 @@ function Game({ game }: { game: GameData}) {
       <p className='text-sm font-bold text-center w-25'>{game.away.name}</p>
 
       {/* row 3 — date */}
-      <h1 className='col-span-3 font-semibold text-lg mb-4'>{game.date}</h1>
+      <h1 className='col-span-3 font-semibold text-lg mb-4'>{formatGameDate(game.date, false, false, false)}</h1>
     </div>
   )
 }
@@ -45,8 +46,8 @@ function Game({ game }: { game: GameData}) {
 function Statistic({ title, value }: { title: string; value: number }){
   return (
     <div className='bg-white p-4 flex flex-col items-center'>
-      <p className='text-sm text-gray-500'>{title}</p>
-      <p className='text-2xl font-bold'>{value.toFixed(2)}</p>
+      <p className='text-xs md:text-sm text-gray-500'>{title}</p>
+      <p className='text-xl md:text-2xl font-bold'>{value.toFixed(2)}</p>
     </div>
   )
 }
@@ -127,38 +128,40 @@ async function TeamHome({ abbrev }: { abbrev: string }) {
     <div className=''>
       {/* Upcoming Games */}
       <div className='max-w-7xl mx-auto mb-5'>
-        <h1 className='text-4xl font-bold mt-10'>Upcoming Games</h1>
-        <div className='flex justify-between mt-4'>
+        <h1 className='flex justify-center md:justify-start text-4xl font-bold mt-10'>Upcoming Games</h1>
+        <div className='flex flex-col items-center md:flex-row md:justify-between mt-4'>
           {games.map((g) => {
             return<Game key={g.id} game={g}/>
           })}
         </div>
       </div>
         
-      <div className='max-w-7xl mx-auto mb-5 grid grid-cols-[2.4fr_1fr] gap-5'>
+      <div className='px-3 md:px-0 md:max-w-7xl mx-auto mb-5 grid md:grid-cols-[2.4fr_1fr] gap-5'>
         {/* Roster */}
-        <div id='roster' className='rounded-md mb-5 bg-white'>
+        <div id='roster' className='rounded-md mb-5 bg-white min-w-0 shadow-sm'>
           <h2 className='text-xl font-semibold pl-4 py-1 bg-black text-white rounded-t-md'>Roster</h2>
-          {/* Table of players */}
-          <div className=''>
-            <div className={`${rosterCols} py-2 bg-[#e6e6e6] font-semibold`}>
-              <h3>Player</h3>
-              <h3>#</h3>
-              <h3>Pos</h3>
-              <h3>Sh</h3>
-              <h3>Ht</h3>
-              <h3>Wt</h3>
-              <h3>Born</h3>
-              <h3>Birthplace</h3>
+          <div className='overflow-x-auto'>
+            <div className='min-w-[800px]'>
+              {/* Table of players */}
+              <div className={`${rosterCols} py-2 bg-[#e6e6e6] font-semibold`}>
+                <h3>Player</h3>
+                <h3>#</h3>
+                <h3>Pos</h3>
+                <h3>Sh</h3>
+                <h3>Ht</h3>
+                <h3>Wt</h3>
+                <h3>Born</h3>
+                <h3>Birthplace</h3>
+              </div>
+              {players.map((p) => (
+                <Player key={p.id} player={p} team_abbrev={p.t.abbrev}/>
+              ))}
             </div>
-            {players.map((p) => (
-              <Player key={p.id} player={p} team_abbrev={p.t.abbrev}/>
-            ))}
           </div>
         </div>
 
         {/* Stats */}
-        <div className='rounded-md mb-5 bg-white h-min'>
+        <div className='rounded-md mb-5 bg-white h-min shadow-sm'>
           <h2 className='text-xl font-semibold ml-4 mt-2'>Team Statistics (2025-2026)</h2>
           <div className='grid grid-cols-2 gap-px bg-gray-300 mx-3 my-2'>
             <Statistic title='Goals For / Game' value={stats.goalsForPerGame}/>

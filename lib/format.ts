@@ -23,9 +23,9 @@ export const formatHeight = (inches: number) =>
   `${Math.floor(inches / 12)}' ${inches % 12}"`
 
 /** "2026-03-03" -> "Tue, Mar 3, 2026" (UTC so the date never shifts a day) */
-export const formatGameDate = (date: string, showYear: boolean) =>
+export const formatGameDate = (date: string, short: boolean, showYear: boolean, hideDay: boolean) =>
   new Date(date).toLocaleDateString('en-US', {
-    weekday: 'long', month: 'short', day: 'numeric', ...(showYear === true && {year: 'numeric'}), timeZone: 'UTC',
+    ...(hideDay === false && (short === true ? {weekday: 'short'} : {weekday: 'long'})), month: 'short', day: 'numeric', ...(showYear === true && {year: 'numeric'}), timeZone: 'UTC',
   })
 
 /** "1996-09-09" -> "Sep 9, 1996" (UTC so the date never shifts a day) */

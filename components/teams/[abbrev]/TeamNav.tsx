@@ -13,7 +13,7 @@ function TeamNav({ abbrev }: { abbrev: string }) {
   const pathname = usePathname()
 
   return (
-    <nav className='flex gap-8 items-center text-white max-w-7xl mx-auto h-12'>
+    <nav className='flex gap-8 items-center text-white max-w-7xl md:mx-auto pl-6 h-12'>
       {tabs.map((t) => {
         const href = `/teams/${abbrev}${t.segment}`
 

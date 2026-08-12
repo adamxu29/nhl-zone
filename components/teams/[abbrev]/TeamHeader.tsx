@@ -22,7 +22,7 @@ async function TeamHeader({ abbrev }: { abbrev: string }) {
   return (
     <div className='bg-[#0D0D0D]'>
       <div className='flex items-center text-white max-w-7xl mx-auto pt-3 pb-7'>
-        <img className='h-25' src={`https://assets.nhle.com/logos/nhl/svg/${abbrev}_dark.svg`} alt={`${abbrev} logo`}/>
+        <img className='w-25 h-20 md:w-auto md:h-25' src={`https://assets.nhle.com/logos/nhl/svg/${abbrev}_dark.svg`} alt={`${abbrev} logo`}/>
         <div>
           <h1 className='text-4xl font-bold'>{team.name}</h1>
           <h2 className='flex gap-2 mt-1'>
