@@ -42,7 +42,7 @@ async function TodaysGames() {
   const { data: games, error } = await supabase
     .from('games')
     .select('id, date, home_score, away_score, home:teams!home_team_id(name, abbrev), away:teams!away_team_id(name, abbrev), game_center_link, game_state, game_type')
-    .eq('date', '2026-01-05')
+    .eq('date', today)
     .overrideTypes<GameData[], { merge: false }>()
   if (error) return <div>Error loading teams: {error.message}</div>
   games.sort((a, b) => priority[a.game_state] - priority[b.game_state])
