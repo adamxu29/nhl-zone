@@ -56,6 +56,13 @@ export interface GoalieStats extends PlayerBase {
 export interface StatCategory<T> {
   label: string
   key: keyof T
-  asc?: boolean                    // GAA and friends: lower is better
+  asc?: boolean // GAA lower is better
   format?: (value: number) => string
+}
+
+// a column of a full stat table — everything StatCategory has, plus whether the
+// header sorts and an escape hatch for cells that aren't a single value
+export interface StatColumn<T> extends StatCategory<T> {
+  sortable?: boolean
+  render?: (item: T, index: number) => React.ReactNode
 }

@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 const tabs = [
   { label: 'Home', segment: '', ready: true },
   { label: 'Schedule', segment: '/schedule', ready: true },
-  { label: 'Roster Stats', segment: '/roster', ready: false },
+  { label: 'Roster Stats', segment: '/roster-stats', ready: true },
 ]
 
 function TeamNav({ abbrev }: { abbrev: string }) {

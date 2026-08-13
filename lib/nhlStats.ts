@@ -7,9 +7,10 @@ const BASE = 'https://api.nhle.com/stats/rest/en'
 const ALL = 'limit=-1'
 
 /** Every skater's season totals. */
-export async function fetchSkaters(): Promise<SkaterStats[]> {
+export async function fetchSkaters(teamId?: number): Promise<SkaterStats[]> {
+  const team = teamId ? `%20and%20teamId=${teamId}` : ''
   const res = await fetch(
-    `${BASE}/skater/summary?cayenneExp=seasonId=${SEASON}%20and%20gameTypeId=2&${ALL}`
+    `${BASE}/skater/summary?cayenneExp=seasonId=${SEASON}%20and%20gameTypeId=2${team}&${ALL}`
   )
   const { data } = await res.json()
   // the skater and goalie endpoints name this field differently — normalise here
@@ -21,9 +22,12 @@ export async function fetchSkaters(): Promise<SkaterStats[]> {
  * Goalie season totals, restricted to 20+ games so that rate stats
  * (GAA, SV%) aren't topped by one-game call-ups.
  */
-export async function fetchGoalies(): Promise<GoalieStats[]> {
+export async function fetchGoalies(teamId?: number): Promise<GoalieStats[]> {
+  // a team's whole crease matters on a roster page; the league table wants 20+ games
+  // so rate stats aren't topped by a one-game call-up
+  const team = teamId ? `%20and%20teamId=${teamId}` : '%20and%20gamesPlayed%3E=20'
   const res = await fetch(
-    `${BASE}/goalie/summary?cayenneExp=seasonId=${SEASON}%20and%20gameTypeId=2%20and%20gamesPlayed%3E=20&${ALL}`
+    `${BASE}/goalie/summary?cayenneExp=seasonId=${SEASON}%20and%20gameTypeId=2${team}&${ALL}`
   )
   const { data } = await res.json()
   return data.map((g: any) => ({ ...g, name: g.goalieFullName }))
