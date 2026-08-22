@@ -186,18 +186,17 @@ function GamePredictor({ teams }: { teams: TeamData[] }) {
           const winner = teams.find((t) => t.abbrev === prediction.pick)
           const pct = prediction.confidence * 100
 
+          // extra top padding on mobile so the absolute Reset button clears the heading
           return (
-            <div className='relative w-full border-t border-gray-200 px-6 py-6'>
-              {/* reset button */}
-              <div className='flex justify-end w-[100%]'>
-                <button
-                  onClick={handleReset}
-                  className={`absolute mb-3 rounded bg-black px-2 py-2 text-lg text-white transition-opacity
-                              hover:opacity-90`}
-                >
-                  Reset
-                </button>
-              </div>
+            <div className='relative w-full border-t border-gray-200 px-6 pb-6 pt-12 md:pt-6'>
+              <button
+                onClick={handleReset}
+                className='absolute top-3 right-3 rounded border border-gray-300 px-3 py-1
+                           text-xs font-semibold uppercase tracking-wider text-gray-600
+                           transition-colors hover:bg-gray-100'
+              >
+                Reset
+              </button>
               {/* winner */}
               <div className='flex flex-col items-center gap-2'>
                 <p className='text-xs font-semibold uppercase tracking-wider text-gray-500'>
