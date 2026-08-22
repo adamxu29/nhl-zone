@@ -16,7 +16,7 @@ function Navbar() {
     ['Home', '/'],
     ['Teams', '/teams'],
     ['Players', '/players'],
-    ['Match Predictor', ''],
+    ['Game Predictor', '/game-predictor'],
   ]
   
   return (

@@ -2,7 +2,8 @@ import Section from '@/components/stats/Section'
 import { fetchSkaters, fetchGoalies } from '@/lib/nhlStats'
 import { formatTOI, formatSavePct, formatGAA } from '@/lib/format'
 
-async function Players() {
+// TODO: Add player pages
+async function Players() { 
   const [skaters, goalies] = await Promise.all([fetchSkaters(), fetchGoalies()])
 
   return (
