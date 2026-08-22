@@ -3,10 +3,12 @@ import { supabase } from '@/lib/supabase'
 import { formatGameDate } from '@/lib/format'
 import { GameData } from '@/lib/types'
 import TeamName from '@/components/teams/TeamName'
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const scheduleCols = 'grid grid-cols-[90px_auto] md:grid-cols-[200px_1fr_150px] items-center gap-x-2 px-4'
 
 function Game({ game }: { game: GameData }) {
+  const today = new Date().toLocaleDateString('en-Ca', {timeZone: 'America/Los_angeles'})
   return(
     <div className={`${scheduleCols} py-2 border-b border-gray-200 text-sm`}>
       <div className='flex flex-col'>
@@ -32,8 +34,9 @@ function Game({ game }: { game: GameData }) {
         </div>
       </div>
 
-      <Link className='hidden md:flex justify-end hover:underline' href={`https://www.nhl.com${game.game_center_link}`}>
-        Gamecenter
+      <Link className='hidden md:flex justify-end hover:underline text-md' href={game.date > today ? `/predict?home=${game.home.abbrev}&away=${game.away.abbrev}` : `https://www.nhl.com${game.game_center_link}`}>
+        {game.date > today ? 'Predict game' : 'Gamecentre'}
+        <ArrowOutwardIcon fontSize='small'/>
       </Link>
     </div>
   )
