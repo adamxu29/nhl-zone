@@ -48,11 +48,14 @@ async function TodaysGames() {
   games.sort((a, b) => priority[a.game_state] - priority[b.game_state])
 
   return (
-    <div className='bg-[#f2f2f2] min-h-[45vh]'>
+    // hide games if none for now, maybe display next game date in the future
+    <div className={`bg-[#f2f2f2] min-h-[45vh] ${games.length == 0 && 'hidden'}`}>
       <h1 className='font-bold text-4xl flex justify-center md:justify-start md:pl-10 py-10'>Todays Games</h1>
 
       <div className='flex flex-col items-center'>
-        {games.length === 0 ? <strong className='text-lg md:text-2xl'>No Scheduled Games For Today</strong> : games.map((g, i) => {
+        {games.length === 0 ? <strong className='text-lg md:text-2xl'>No Scheduled Games For Today</strong> 
+        
+        : games.map((g, i) => {
           return<Game key={i} game={g}/>
         })}
       </div>

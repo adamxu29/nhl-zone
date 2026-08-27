@@ -34,7 +34,7 @@ function Game({ game }: { game: GameData }) {
         </div>
       </div>
 
-      <Link className='hidden md:flex justify-end hover:underline text-md' href={game.date > today ? `/predict?home=${game.home.abbrev}&away=${game.away.abbrev}` : `https://www.nhl.com${game.game_center_link}`}>
+      <Link className='hidden md:flex justify-end hover:underline text-md' href={game.date > today ? `/game-predictor?home=${game.home.abbrev}&away=${game.away.abbrev}` : `https://www.nhl.com${game.game_center_link}`}>
         {game.date > today ? 'Predict game' : 'Gamecenter'}
         <ArrowOutwardIcon fontSize='small'/>
       </Link>
