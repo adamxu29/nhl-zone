@@ -17,7 +17,7 @@ const columns: StatColumn<SkaterStats>[] = [
   { label: 'G', key: 'goals' },
   { label: 'A', key: 'assists' },
   { label: 'Pts', key: 'points' },
-  { label: 'P/M', key: 'plusMinus' },
+  { label: '+/-', key: 'plusMinus' },
   { label: 'TOI', key: 'timeOnIcePerGame', format: formatTOI },
   { label: 'PIM', key: 'penaltyMinutes' },
 ]
