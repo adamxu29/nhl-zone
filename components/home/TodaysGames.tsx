@@ -15,7 +15,7 @@ function Game({ game }: { game: GameData}) {
       </div>
 
       <div className='grid grid-cols-[1fr_auto_1fr] items-center font-medium my-2 md:my-0'>
-        <div className='flex items-center justify-end gap-2'>
+        <div className='flex items-center justify-end gap-2 font-bold'>
           <TeamName abbrev={game.home.abbrev} name={game.home.name}/>
           <img className='w-12 h-8' src={`https://assets.nhle.com/logos/nhl/svg/${game.home.abbrev}_light.svg`} alt={`${game.home.name} logo`}/>
           {game.game_state !== "FUT" && (game.home_score)}
@@ -23,7 +23,7 @@ function Game({ game }: { game: GameData}) {
 
         <p className='mx-5'>@</p>
 
-        <div className='flex items-center justify-start gap-2'>
+        <div className='flex items-center justify-start gap-2 font-bold'>
           {game.game_state !== "FUT" && (game.away_score)}
           <img className='w-12 h-8' src={`https://assets.nhle.com/logos/nhl/svg/${game.away.abbrev}_light.svg`} alt={`${game.away.name} logo`}/>
           <TeamName abbrev={game.away.abbrev} name={game.away.name}/>
